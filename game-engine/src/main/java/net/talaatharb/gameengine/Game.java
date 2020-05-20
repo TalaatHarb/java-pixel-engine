@@ -34,20 +34,20 @@ public abstract class Game implements Runnable {
 
 	private final JFrame frame;
 
-	private int height;
+	protected int height;
 
-	private Renderer renderer;
+	protected Renderer renderer;
 
 	@Getter
-	private boolean running = true;
+	protected boolean running = true;
 
-	private int scale;
+	protected int scale;
 
-	private Thread thread;
+	protected Thread thread;
 
-	private String title;
+	protected String title;
 
-	private int width;
+	protected int width;
 
 	public Game() {
 		this(DEFAULT_HEIGHT, DEFAULT_WIDTH, DEFAULT_SCALE, DEFAULT_TITLE);
@@ -72,6 +72,7 @@ public abstract class Game implements Runnable {
 		this.frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.frame.setLocationRelativeTo(null);
 		this.frame.setVisible(true);
+		this.frame.setAlwaysOnTop(true);
 	}
 
 	public Game(final int height, final int width, final String title) {
@@ -103,10 +104,46 @@ public abstract class Game implements Runnable {
 	}
 
 	public void run() {
+		final long updateTime = ((long) 1e9) / 60;
+		final long second = (long) 1e9;
+		
+		long lastTime = System.nanoTime();
+		long now = 0;
+		
+		long delta = 0;
+		long deltaUpdate = 0;
+		long accumlatedTime = 0;
+		long approximateTime = 0;
+		
+		int updates = 0;
+		int frames = 0;
+		
 		while (running) {
-			updateGame();
+			now = System.nanoTime();
+			delta = now - lastTime;
+			deltaUpdate += delta;
+			accumlatedTime += delta;
+			
+			if (deltaUpdate >= updateTime) {
+				updateGame();
+				updates++;
+				
+				deltaUpdate -= updateTime;
+			}
+			
 			renderGame();
+			frames++;
+
+			if ((accumlatedTime - approximateTime) >= second) {
+				log.info(String.format("ups: %d, fps: %d, time: %d", updates, frames, accumlatedTime / second));
+				updates = 0;
+				frames = 0;
+				approximateTime += second;
+			}
+
+			lastTime = now;
 		}
+		stop();
 	}
 
 	public void start() {
@@ -122,7 +159,7 @@ public abstract class Game implements Runnable {
 			log.debug("Game Thread interrupted: " + title, e);
 			thread.interrupt();
 		}
-		
+
 		new Timer().schedule(new TimerTask() {
 			@Override
 			public void run() {

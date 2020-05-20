@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 public class GameTests {
 
-	private static final long DEFAULT_DELAY = 2000L;
+	private static final long DEFAULT_DELAY = 2500L;
 	private static final long DEFAULT_POLL = 100L;
 
 	@Test

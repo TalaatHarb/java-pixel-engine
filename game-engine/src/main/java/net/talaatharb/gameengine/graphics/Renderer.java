@@ -7,14 +7,14 @@ import lombok.Getter;
 
 public class Renderer {
 	
-	private int width;
+	protected int width;
 	
-	private int height;
+	protected int height;
 	
 	@Getter
 	private BufferedImage image;
 
-	private int[] pixels;
+	protected int[] pixels;
 	
 	public Renderer(final int width, final int height) {
 		this.width = width;
