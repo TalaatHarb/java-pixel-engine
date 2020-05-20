@@ -1,4 +1,4 @@
-package net.talaatharb.gameengine;
+package net.talaatharb.gameengine.swing;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -10,19 +10,19 @@ import java.util.concurrent.TimeUnit;
 import org.awaitility.Awaitility;
 import org.junit.jupiter.api.Test;
 
+import net.talaatharb.gameengine.Game;
 import net.talaatharb.gameengine.graphics.Renderer;
 
-public class GameTests {
+public class SwingGameTests {
 
 	private static final long DEFAULT_DELAY = 2500L;
 	private static final long DEFAULT_POLL = 100L;
 
 	@Test
-	public void emptyGameStartsAndStops() throws InterruptedException {
-		final Game game = new Game() {
-
+	public void emptySwingGameStartsAndStops() throws InterruptedException {
+		final Game game = new SwingGame() {
 			@Override
-			protected void renderGame(final Renderer renderer) {
+			public void render(final Renderer renderer) {
 			}
 
 			@Override

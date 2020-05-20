@@ -1,24 +1,11 @@
 package net.talaatharb.gameengine;
 
-import java.awt.Canvas;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.event.WindowEvent;
-import java.awt.image.BufferStrategy;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import javax.swing.JFrame;
-import javax.swing.WindowConstants;
-
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.talaatharb.gameengine.graphics.Renderer;
 
 @Slf4j
 public abstract class Game implements Runnable {
-
-	private static final Long CLOSE_DELAY = 100L;
 
 	public static final int DEFAULT_HEIGHT = 360;
 
@@ -27,12 +14,6 @@ public abstract class Game implements Runnable {
 	public static final String DEFAULT_TITLE = "Game";
 
 	public static final int DEFAULT_WIDTH = 640;
-
-	private BufferStrategy bufferStrategy;
-
-	private final Canvas canvas;
-
-	private final JFrame frame;
 
 	protected int height;
 
@@ -59,83 +40,49 @@ public abstract class Game implements Runnable {
 		this.title = title;
 		this.width = width;
 
-		this.renderer = new Renderer(this.width, this.height);
-
-		this.frame = new JFrame(this.title);
-		this.frame.setResizable(false);
-
-		this.canvas = new Canvas();
-		this.canvas.setPreferredSize(new Dimension(this.scale * this.width, this.scale * this.height));
-
-		this.frame.add(this.canvas);
-		this.frame.pack();
-		this.frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		this.frame.setLocationRelativeTo(null);
-		this.frame.setVisible(true);
-		this.frame.setAlwaysOnTop(true);
+		log.info("Constructing game: " + this.title);
+		log.info(String.format("Width: %d, Height: %d, Scale: %d", this.width, this.height, this.scale));
 	}
 
 	public Game(final int height, final int width, final String title) {
 		this(height, width, DEFAULT_SCALE, title);
 	}
 
-	/**
-	 * Render game contents
-	 */
-	public abstract void render();
-
-	private void renderGame() {
-		if (bufferStrategy == null) {
-			this.canvas.createBufferStrategy(3);
-			bufferStrategy = this.canvas.getBufferStrategy();
-		}
-		final Graphics graphics = bufferStrategy.getDrawGraphics();
-
-		// Clear with black color
-		renderer.clear();
-
-		render();
-
-		// Draw layer
-		graphics.drawImage(renderer.getImage(), 0, 0, canvas.getWidth(), canvas.getHeight(), null);
-
-		graphics.dispose();
-		bufferStrategy.show();
-	}
+	protected abstract void renderGame(final Renderer renderer);
 
 	public void run() {
 		final long updateTime = ((long) 1e9) / 60;
 		final long second = (long) 1e9;
-		
+
 		long lastTime = System.nanoTime();
 		long now = 0;
-		
+
 		long delta = 0;
 		long deltaUpdate = 0;
 		long accumlatedTime = 0;
 		long approximateTime = 0;
-		
+
 		int updates = 0;
-		int frames = 0;
-		
+		long frames = 0;
+
 		while (running) {
 			now = System.nanoTime();
 			delta = now - lastTime;
 			deltaUpdate += delta;
 			accumlatedTime += delta;
-			
+
 			if (deltaUpdate >= updateTime) {
-				updateGame();
+				updateGame(delta);
 				updates++;
-				
+
 				deltaUpdate -= updateTime;
 			}
-			
-			renderGame();
+
+			renderGame(renderer);
 			frames++;
 
 			if ((accumlatedTime - approximateTime) >= second) {
-				log.info(String.format("ups: %d, fps: %d, time: %d", updates, frames, accumlatedTime / second));
+				log.info(String.format("ups: %d, fps: %d, time: %f", updates, frames, (1.0 * accumlatedTime) / second));
 				updates = 0;
 				frames = 0;
 				approximateTime += second;
@@ -159,21 +106,14 @@ public abstract class Game implements Runnable {
 			log.debug("Game Thread interrupted: " + title, e);
 			thread.interrupt();
 		}
-
-		new Timer().schedule(new TimerTask() {
-			@Override
-			public void run() {
-				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-			}
-		}, CLOSE_DELAY);
 	}
 
 	/**
 	 * Update game contents
 	 */
-	public abstract void update();
+	public abstract void update(final long delta);
 
-	private void updateGame() {
-		update();
+	private void updateGame(final long delta) {
+		update(delta);
 	}
 }

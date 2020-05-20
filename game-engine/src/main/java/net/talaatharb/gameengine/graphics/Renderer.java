@@ -1,18 +1,13 @@
 package net.talaatharb.gameengine.graphics;
 
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferInt;
+import lombok.extern.slf4j.Slf4j;
 
-import lombok.Getter;
-
-public class Renderer {
+@Slf4j
+public abstract class Renderer {
 	
 	protected int width;
 	
 	protected int height;
-	
-	@Getter
-	private BufferedImage image;
 
 	protected int[] pixels;
 	
@@ -20,8 +15,7 @@ public class Renderer {
 		this.width = width;
 		this.height = height;
 		
-		this.image = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_RGB);
-		this.pixels = ((DataBufferInt) this.image.getRaster().getDataBuffer()).getData();
+		log.info("Constructing renderer");
 	}
 	
 	public void clear() {
