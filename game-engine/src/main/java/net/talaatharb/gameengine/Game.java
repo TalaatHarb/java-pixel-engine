@@ -3,6 +3,7 @@ package net.talaatharb.gameengine;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.talaatharb.gameengine.graphics.Renderer;
+import net.talaatharb.gameengine.input.Input;
 
 @Slf4j
 public abstract class Game implements Runnable {
@@ -18,6 +19,9 @@ public abstract class Game implements Runnable {
 	protected int height;
 
 	protected Renderer renderer;
+
+	@Getter
+	protected Input input;
 
 	@Getter
 	protected boolean running = true;
@@ -51,6 +55,8 @@ public abstract class Game implements Runnable {
 	protected abstract void renderGame(final Renderer renderer);
 
 	public void run() {
+		log.info("Game starting");
+
 		final long updateTime = ((long) 1e9) / 60;
 		final long second = (long) 1e9;
 
@@ -99,12 +105,18 @@ public abstract class Game implements Runnable {
 	}
 
 	public void stop() {
-		running = false;
-		try {
-			thread.join();
-		} catch (InterruptedException e) {
-			log.debug("Game Thread interrupted: " + title, e);
-			thread.interrupt();
+		if (running) {
+			log.info("Game stopped");
+			running = false;
+			if (input != null) {
+				input.release();
+			}
+			try {
+				thread.join();
+			} catch (InterruptedException e) {
+				log.debug("Game Thread interrupted: " + title, e);
+				thread.interrupt();
+			}
 		}
 	}
 

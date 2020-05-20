@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.talaatharb.gameengine.Game;
 import net.talaatharb.gameengine.graphics.Renderer;
 import net.talaatharb.gameengine.swing.graphics.SwingRenderer;
+import net.talaatharb.gameengine.swing.input.AWTInput;
 
 @Slf4j
 public abstract class SwingGame extends Game {
@@ -48,6 +49,8 @@ public abstract class SwingGame extends Game {
 		this.frame.setLocationRelativeTo(null);
 		this.frame.setVisible(true);
 		this.frame.setAlwaysOnTop(true);
+		this.canvas.requestFocus();
+		input = new AWTInput(canvas);
 		
 		log.info(String.format("Game: %s constructed using Swing", title));
 	}
@@ -83,7 +86,6 @@ public abstract class SwingGame extends Game {
 
 	@Override
 	public void stop() {
-		super.stop();
 
 		new Timer().schedule(new TimerTask() {
 			@Override
@@ -91,5 +93,6 @@ public abstract class SwingGame extends Game {
 				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 			}
 		}, CLOSE_DELAY);
+		super.stop();
 	}
 }
