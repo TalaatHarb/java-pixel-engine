@@ -1,4 +1,4 @@
-package net.talatharb.gameengine.sandbox.simplesquare;
+package net.talaatharb.gameengine.sandbox.simplesquare;
 
 import net.talaatharb.gameengine.Game;
 import net.talaatharb.gameengine.graphics.Renderer;
@@ -16,12 +16,17 @@ public class SimpleSwingSquare extends SwingGame {
 
 	public SimpleSwingSquare() {
 		super(500, 500, "Simple Square");
-		gameLogic = new SimpleSquareGameLogic(this);
 	}
-
+	
 	@Override
 	public void render(Renderer renderer) {
 		gameLogic.render(renderer);
+	}
+
+	@Override
+	public void setup() {
+		super.setup();
+		gameLogic = new SimpleSquareGameLogic(this);
 	}
 
 	@Override

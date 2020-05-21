@@ -1,4 +1,4 @@
-package net.talatharb.gameengine.sandbox.simplesquare;
+package net.talaatharb.gameengine.sandbox.simplesquare;
 
 import net.talaatharb.gameengine.Game;
 import net.talaatharb.gameengine.graphics.Renderer;

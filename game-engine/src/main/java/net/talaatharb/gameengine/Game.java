@@ -17,7 +17,7 @@ public abstract class Game implements Runnable, Updateable, Renderable {
 	public static final String DEFAULT_TITLE = "Game";
 
 	public static final int DEFAULT_WIDTH = 640;
-	
+
 	@Getter
 	protected int height;
 
@@ -48,8 +48,8 @@ public abstract class Game implements Runnable, Updateable, Renderable {
 		this.title = title;
 		this.width = width;
 
-		log.info("Constructing game: " + this.title);
-		log.info(String.format("Width: %d, Height: %d, Scale: %d", this.width, this.height, this.scale));
+		log.debug("Constructing game: " + this.title);
+		log.debug(String.format("Width: %d, Height: %d, Scale: %d", this.width, this.height, this.scale));
 	}
 
 	public Game(final int height, final int width, final String title) {
@@ -60,6 +60,8 @@ public abstract class Game implements Runnable, Updateable, Renderable {
 
 	public void run() {
 		log.info("Game starting");
+
+		setup();
 
 		final long updateTime = ((long) 1e9) / 60;
 		final long second = (long) 1e9;
@@ -103,6 +105,8 @@ public abstract class Game implements Runnable, Updateable, Renderable {
 		stop();
 	}
 
+	public abstract void setup();
+
 	public void start() {
 		thread = new Thread(this, title);
 		thread.start();
@@ -118,7 +122,7 @@ public abstract class Game implements Runnable, Updateable, Renderable {
 			try {
 				thread.join();
 			} catch (InterruptedException e) {
-				log.debug("Game Thread interrupted: " + title, e);
+				log.warn("Game Thread interrupted: " + title, e);
 				thread.interrupt();
 			}
 		}

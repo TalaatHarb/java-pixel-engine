@@ -15,7 +15,7 @@ public abstract class Renderer {
 		this.width = width;
 		this.height = height;
 
-		log.info("Constructing renderer");
+		log.debug("Constructing renderer");
 	}
 
 	public void clear() {

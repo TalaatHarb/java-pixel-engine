@@ -16,7 +16,7 @@ public class SwingRenderer extends Renderer {
 	public SwingRenderer(final int width, final int height) {
 		super(width, height);
 
-		log.info("Constructing swing renderer");
+		log.debug("Constructing swing renderer");
 		this.image = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_RGB);
 		this.pixels = ((DataBufferInt) this.image.getRaster().getDataBuffer()).getData();
 	}

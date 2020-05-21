@@ -22,18 +22,23 @@ public class GameTests {
 		final Game game = new Game() {
 
 			@Override
+			public void render(Renderer renderer) {				
+			}
+
+			@Override
 			protected void renderGame() {
 				render(renderer);
 			}
 
 			@Override
-			public void update(final long delta) {
+			public void setup() {
 			}
 
 			@Override
-			public void render(Renderer renderer) {				
+			public void update(final long delta) {
 			}
 		};
+		
 		final Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
 			@Override

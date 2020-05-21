@@ -24,9 +24,9 @@ public abstract class SwingGame extends Game {
 
 	private BufferStrategy bufferStrategy;
 
-	private final Canvas canvas;
+	private Canvas canvas;
 
-	private final JFrame frame;
+	private JFrame frame;
 
 	public SwingGame() {
 		this(DEFAULT_HEIGHT, DEFAULT_WIDTH, DEFAULT_SCALE, DEFAULT_TITLE);
@@ -34,7 +34,34 @@ public abstract class SwingGame extends Game {
 
 	public SwingGame(final int height, final int width, final int scale, final String title) {
 		super(height, width, scale, title);
+		log.debug(String.format("Game: %s constructed using Swing", title));
+	}
 
+	public SwingGame(final int height, final int width, final String title) {
+		this(height, width, DEFAULT_SCALE, title);
+	}
+
+	@Override
+	protected void renderGame() {
+		if (bufferStrategy == null) {
+			this.canvas.createBufferStrategy(3);
+			bufferStrategy = this.canvas.getBufferStrategy();
+		}
+		final Graphics graphics = bufferStrategy.getDrawGraphics();
+
+		// Clear with black color
+		renderer.clear();
+
+		render(renderer);
+
+		// Draw layer
+		graphics.drawImage(((SwingRenderer) renderer).getImage(), 0, 0, canvas.getWidth(), canvas.getHeight(), null);
+
+		graphics.dispose();
+		bufferStrategy.show();
+	}
+
+	public void setup() {
 		this.renderer = new SwingRenderer(this.width, this.height);
 
 		this.frame = new JFrame(this.title);
@@ -60,32 +87,6 @@ public abstract class SwingGame extends Game {
 		});
 
 		this.canvas.requestFocus();
-
-		log.info(String.format("Game: %s constructed using Swing", title));
-	}
-
-	public SwingGame(final int height, final int width, final String title) {
-		this(height, width, DEFAULT_SCALE, title);
-	}
-
-	@Override
-	protected void renderGame() {
-		if (bufferStrategy == null) {
-			this.canvas.createBufferStrategy(3);
-			bufferStrategy = this.canvas.getBufferStrategy();
-		}
-		final Graphics graphics = bufferStrategy.getDrawGraphics();
-
-		// Clear with black color
-		renderer.clear();
-
-		render(renderer);
-
-		// Draw layer
-		graphics.drawImage(((SwingRenderer) renderer).getImage(), 0, 0, canvas.getWidth(), canvas.getHeight(), null);
-
-		graphics.dispose();
-		bufferStrategy.show();
 	}
 
 	@Override
