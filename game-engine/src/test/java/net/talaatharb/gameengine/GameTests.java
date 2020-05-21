@@ -22,11 +22,16 @@ public class GameTests {
 		final Game game = new Game() {
 
 			@Override
-			protected void renderGame(final Renderer renderer) {
+			protected void renderGame() {
+				render(renderer);
 			}
 
 			@Override
 			public void update(final long delta) {
+			}
+
+			@Override
+			public void render(Renderer renderer) {				
 			}
 		};
 		final Timer timer = new Timer();

@@ -5,11 +5,11 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public abstract class Renderer {
 
-	protected int width;
-
 	protected int height;
 
 	protected int[] pixels;
+
+	protected int width;
 
 	public Renderer(final int width, final int height) {
 		this.width = width;

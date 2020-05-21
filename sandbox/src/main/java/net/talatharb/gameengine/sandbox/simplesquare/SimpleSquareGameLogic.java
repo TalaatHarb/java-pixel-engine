@@ -1,26 +1,32 @@
-package net.talatharb.gameengine.sandbox;
+package net.talatharb.gameengine.sandbox.simplesquare;
 
 import net.talaatharb.gameengine.Game;
 import net.talaatharb.gameengine.graphics.Renderer;
 import net.talaatharb.gameengine.input.Keyboard;
-import net.talaatharb.gameengine.swing.SwingGame;
+import net.talaatharb.gameengine.logic.GameLogic;
 
-public class SimpleSquare extends SwingGame {
-
+public class SimpleSquareGameLogic extends GameLogic {
 	private static final int SQUARE_COLOR = 0xFF00FF;
 
 	private static final int SQUARE_SIDE = 32;
 
 	private static final int SQUARE_SPEED = 5;
 
-	public static void main(String[] args) {
-		final Game game = new SimpleSquare();
-		game.start();
-	}
+	private int height;
 
+	private Keyboard keyboard;
+
+	private int width;
 	private int x;
 
 	private int y;
+
+	public SimpleSquareGameLogic(final Game game) {
+		super(game);
+		keyboard = game.getInput().getKeyboard();
+		width = game.getWidth();
+		height = game.getHeight();
+	}
 
 	@Override
 	public void render(Renderer renderer) {
@@ -29,16 +35,16 @@ public class SimpleSquare extends SwingGame {
 
 	@Override
 	public void update(long delta) {
-		if (input.getKeyboard().isKeyPressed(Keyboard.VK_UP))
+		if (keyboard.isKeyPressed(Keyboard.VK_UP))
 			y -= SQUARE_SPEED;
 
-		if (input.getKeyboard().isKeyPressed(Keyboard.VK_DOWN))
+		if (keyboard.isKeyPressed(Keyboard.VK_DOWN))
 			y += SQUARE_SPEED;
 
-		if (input.getKeyboard().isKeyPressed(Keyboard.VK_LEFT))
+		if (keyboard.isKeyPressed(Keyboard.VK_LEFT))
 			x -= SQUARE_SPEED;
 
-		if (input.getKeyboard().isKeyPressed(Keyboard.VK_RIGHT))
+		if (keyboard.isKeyPressed(Keyboard.VK_RIGHT))
 			x += SQUARE_SPEED;
 
 		if (x < 0)
@@ -53,9 +59,8 @@ public class SimpleSquare extends SwingGame {
 		if (y > (height - SQUARE_SIDE))
 			y = (height - SQUARE_SIDE);
 
-		if (input.getKeyboard().isKeyPressed(Keyboard.VK_ESCAPE)) {
-			this.stop();
+		if (keyboard.isKeyPressed(Keyboard.VK_ESCAPE)) {
+			this.game.stop();
 		}
 	}
-
 }

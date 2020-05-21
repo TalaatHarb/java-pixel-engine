@@ -2,11 +2,13 @@ package net.talaatharb.gameengine;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import net.talaatharb.gameengine.graphics.Renderable;
 import net.talaatharb.gameengine.graphics.Renderer;
 import net.talaatharb.gameengine.input.Input;
+import net.talaatharb.gameengine.logic.Updateable;
 
 @Slf4j
-public abstract class Game implements Runnable {
+public abstract class Game implements Runnable, Updateable, Renderable {
 
 	public static final int DEFAULT_HEIGHT = 360;
 
@@ -15,13 +17,14 @@ public abstract class Game implements Runnable {
 	public static final String DEFAULT_TITLE = "Game";
 
 	public static final int DEFAULT_WIDTH = 640;
-
+	
+	@Getter
 	protected int height;
-
-	protected Renderer renderer;
 
 	@Getter
 	protected Input input;
+
+	protected Renderer renderer;
 
 	@Getter
 	protected boolean running = true;
@@ -32,6 +35,7 @@ public abstract class Game implements Runnable {
 
 	protected String title;
 
+	@Getter
 	protected int width;
 
 	public Game() {
@@ -52,7 +56,7 @@ public abstract class Game implements Runnable {
 		this(height, width, DEFAULT_SCALE, title);
 	}
 
-	protected abstract void renderGame(final Renderer renderer);
+	protected abstract void renderGame();
 
 	public void run() {
 		log.info("Game starting");
@@ -78,13 +82,13 @@ public abstract class Game implements Runnable {
 			accumlatedTime += delta;
 
 			if (deltaUpdate >= updateTime) {
-				updateGame(delta);
+				update(delta);
 				updates++;
 
 				deltaUpdate -= updateTime;
 			}
 
-			renderGame(renderer);
+			renderGame();
 			frames++;
 
 			if ((accumlatedTime - approximateTime) >= second) {
@@ -118,14 +122,5 @@ public abstract class Game implements Runnable {
 				thread.interrupt();
 			}
 		}
-	}
-
-	/**
-	 * Update game contents
-	 */
-	public abstract void update(final long delta);
-
-	private void updateGame(final long delta) {
-		update(delta);
 	}
 }

@@ -3,6 +3,7 @@ package net.talaatharb.gameengine.swing;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
 import java.util.Timer;
@@ -13,7 +14,6 @@ import javax.swing.WindowConstants;
 
 import lombok.extern.slf4j.Slf4j;
 import net.talaatharb.gameengine.Game;
-import net.talaatharb.gameengine.graphics.Renderer;
 import net.talaatharb.gameengine.swing.graphics.SwingRenderer;
 import net.talaatharb.gameengine.swing.input.AWTInput;
 
@@ -49,9 +49,18 @@ public abstract class SwingGame extends Game {
 		this.frame.setLocationRelativeTo(null);
 		this.frame.setVisible(true);
 		this.frame.setAlwaysOnTop(true);
-		this.canvas.requestFocus();
 		input = new AWTInput(canvas);
-		
+		final Game game = this;
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				game.stop();
+				System.exit(0);
+			}
+		});
+
+		this.canvas.requestFocus();
+
 		log.info(String.format("Game: %s constructed using Swing", title));
 	}
 
@@ -59,13 +68,8 @@ public abstract class SwingGame extends Game {
 		this(height, width, DEFAULT_SCALE, title);
 	}
 
-	/**
-	 * Render game contents
-	 */
-	public abstract void render(final Renderer renderer);
-
 	@Override
-	protected void renderGame(final Renderer renderer) {
+	protected void renderGame() {
 		if (bufferStrategy == null) {
 			this.canvas.createBufferStrategy(3);
 			bufferStrategy = this.canvas.getBufferStrategy();

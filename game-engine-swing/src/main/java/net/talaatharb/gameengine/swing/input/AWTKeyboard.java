@@ -7,18 +7,13 @@ import java.awt.event.KeyListener;
 import net.talaatharb.gameengine.input.Keyboard;
 
 public class AWTKeyboard extends Keyboard implements KeyListener {
-	
+
 	private Component parentComponent;
-	
+
 	public AWTKeyboard(final Component parentComponent) {
 		super();
 		this.parentComponent = parentComponent;
 		parentComponent.addKeyListener(this);
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// nothing to happen for key typed events
 	}
 
 	@Override
@@ -30,6 +25,11 @@ public class AWTKeyboard extends Keyboard implements KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		keys[e.getKeyCode()] = false;
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// nothing to happen for key typed events
 	}
 
 	@Override
