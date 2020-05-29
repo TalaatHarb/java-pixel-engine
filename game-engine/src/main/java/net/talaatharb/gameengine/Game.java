@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.talaatharb.gameengine.graphics.Renderable;
 import net.talaatharb.gameengine.graphics.Renderer;
+import net.talaatharb.gameengine.graphics.SpriteSheetLoader;
 import net.talaatharb.gameengine.input.Input;
 import net.talaatharb.gameengine.logic.Updateable;
 
@@ -29,7 +30,11 @@ public abstract class Game implements Runnable, Updateable, Renderable {
 	@Getter
 	protected boolean running = true;
 
+	@Getter
 	protected int scale;
+
+	@Getter
+	protected SpriteSheetLoader spriteSheetLoader;
 
 	protected Thread thread;
 

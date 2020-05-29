@@ -1,4 +1,4 @@
-package net.talaatharb.gameengine.swing;
+package net.talaatharb.gameengine;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
@@ -13,9 +13,9 @@ import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
 import lombok.extern.slf4j.Slf4j;
-import net.talaatharb.gameengine.Game;
-import net.talaatharb.gameengine.swing.graphics.SwingRenderer;
-import net.talaatharb.gameengine.swing.input.AWTInput;
+import net.talaatharb.gameengine.graphics.AWTSpriteSheetLoader;
+import net.talaatharb.gameengine.graphics.SwingRenderer;
+import net.talaatharb.gameengine.input.AWTInput;
 
 @Slf4j
 public abstract class SwingGame extends Game {
@@ -76,7 +76,8 @@ public abstract class SwingGame extends Game {
 		this.frame.setLocationRelativeTo(null);
 		this.frame.setVisible(true);
 		this.frame.setAlwaysOnTop(true);
-		input = new AWTInput(canvas);
+		input = new AWTInput(canvas, this.scale);
+		spriteSheetLoader = new AWTSpriteSheetLoader();
 		final Game game = this;
 		frame.addWindowListener(new WindowAdapter() {
 			@Override

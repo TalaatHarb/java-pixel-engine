@@ -1,4 +1,4 @@
-package net.talaatharb.gameengine.swing.input;
+package net.talaatharb.gameengine.input;
 
 import java.awt.Component;
 import java.awt.event.KeyEvent;

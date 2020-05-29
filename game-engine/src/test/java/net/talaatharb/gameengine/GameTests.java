@@ -22,7 +22,7 @@ public class GameTests {
 		final Game game = new Game() {
 
 			@Override
-			public void render(Renderer renderer) {				
+			public void render(Renderer renderer) {
 			}
 
 			@Override
@@ -38,7 +38,7 @@ public class GameTests {
 			public void update(final long delta) {
 			}
 		};
-		
+
 		final Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
 			@Override

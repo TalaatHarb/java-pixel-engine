@@ -11,6 +11,7 @@ import org.awaitility.Awaitility;
 import org.junit.jupiter.api.Test;
 
 import net.talaatharb.gameengine.Game;
+import net.talaatharb.gameengine.SwingGame;
 import net.talaatharb.gameengine.graphics.Renderer;
 
 public class SwingGameTests {

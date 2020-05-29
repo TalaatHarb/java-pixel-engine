@@ -5,7 +5,7 @@ import net.talaatharb.gameengine.graphics.Renderer;
 import net.talaatharb.gameengine.input.Keyboard;
 import net.talaatharb.gameengine.logic.GameLogic;
 
-public class SimpleSquareGameLogic extends GameLogic {
+public class SimpleSquareLogic extends GameLogic {
 	private static final int SQUARE_COLOR = 0xFF00FF;
 
 	private static final int SQUARE_SIDE = 32;
@@ -21,7 +21,7 @@ public class SimpleSquareGameLogic extends GameLogic {
 
 	private int y;
 
-	public SimpleSquareGameLogic(final Game game) {
+	public SimpleSquareLogic(final Game game) {
 		super(game);
 		keyboard = game.getInput().getKeyboard();
 		width = game.getWidth();

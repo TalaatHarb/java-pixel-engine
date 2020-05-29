@@ -1,4 +1,4 @@
-package net.talaatharb.gameengine.swing.graphics;
+package net.talaatharb.gameengine.graphics;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
