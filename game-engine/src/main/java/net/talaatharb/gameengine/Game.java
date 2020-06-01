@@ -47,14 +47,16 @@ public abstract class Game implements Runnable, Updateable, Renderable {
 		this(DEFAULT_HEIGHT, DEFAULT_WIDTH, DEFAULT_SCALE, DEFAULT_TITLE);
 	}
 
-	public Game(final int height, final int width, final int scale, final String title) {
+	public Game(final int height, final int width, final int scale,
+			final String title) {
 		this.height = height;
 		this.scale = scale;
 		this.title = title;
 		this.width = width;
 
 		log.debug("Constructing game: " + this.title);
-		log.debug(String.format("Width: %d, Height: %d, Scale: %d", this.width, this.height, this.scale));
+		log.debug(String.format("Width: %d, Height: %d, Scale: %d", this.width,
+				this.height, this.scale));
 	}
 
 	public Game(final int height, final int width, final String title) {
@@ -64,7 +66,7 @@ public abstract class Game implements Runnable, Updateable, Renderable {
 	protected abstract void renderGame();
 
 	public void run() {
-		log.info("Game starting");
+		log.debug("Game starting");
 
 		setup();
 
@@ -89,7 +91,7 @@ public abstract class Game implements Runnable, Updateable, Renderable {
 			accumlatedTime += delta;
 
 			if (deltaUpdate >= updateTime) {
-				update(delta);
+				update(deltaUpdate);
 				updates++;
 
 				deltaUpdate -= updateTime;
@@ -99,7 +101,8 @@ public abstract class Game implements Runnable, Updateable, Renderable {
 			frames++;
 
 			if ((accumlatedTime - approximateTime) >= second) {
-				log.info(String.format("ups: %d, fps: %d, time: %f", updates, frames, (1.0 * accumlatedTime) / second));
+				log.debug(String.format("ups: %d, fps: %d, time: %f", updates,
+						frames, (1.0 * accumlatedTime) / second));
 				updates = 0;
 				frames = 0;
 				approximateTime += second;
@@ -119,7 +122,7 @@ public abstract class Game implements Runnable, Updateable, Renderable {
 
 	public void stop() {
 		if (running) {
-			log.info("Game stopped");
+			log.debug("Game stopped");
 			running = false;
 			if (input != null) {
 				input.release();

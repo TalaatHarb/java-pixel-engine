@@ -11,15 +11,17 @@ public class Sprite {
 	private final int[] pixels;
 	private final int width;
 
-	public Sprite(final SpriteSheet spriteSheet, final int indexX, final int indexY, final int cellsX,
-			final int cellsY) {
+	public Sprite(final SpriteSheet spriteSheet, final int indexX,
+			final int indexY, final int cellsX, final int cellsY) {
 
-		if ((indexX + cellsX) > spriteSheet.getCellsX() || (indexY + cellsY) > spriteSheet.getCellsY()) {
+		if ((indexX + cellsX) > spriteSheet.getCellsX()
+				|| (indexY + cellsY) > spriteSheet.getCellsY()) {
 			log.debug(String.format(
 					"Wrong size or indecies indexX = %d, indexY = %d, cellsX = %d, cellsY = %d for sprite sheet: %s",
 					indexX, indexY, cellsX, cellsY, spriteSheet.getPath()));
 			throw new IndexOutOfBoundsException(
-					"Wrong indecies or size of sprite in sprite sheet: " + spriteSheet.getPath());
+					"Wrong indecies or size of sprite in sprite sheet: "
+							+ spriteSheet.getPath());
 		}
 
 		final int spriteSheetSize = spriteSheet.getSize();
@@ -38,7 +40,8 @@ public class Sprite {
 			final int yShift = y * width;
 			final int yShiftSheet = (startY + y) * spriteSheetWidth;
 			for (int x = 0; x < width; x++) {
-				this.pixels[x + yShift] = spriteSheetPixels[(startX + x) + yShiftSheet];
+				this.pixels[x + yShift] = spriteSheetPixels[(startX + x)
+						+ yShiftSheet];
 			}
 		}
 	}

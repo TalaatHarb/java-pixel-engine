@@ -27,7 +27,8 @@ public abstract class Renderer {
 		}
 	}
 
-	public void fillRec(final int x, final int y, final int w, final int h, final int fillColor) {
+	public void fillRec(final int x, final int y, final int w, final int h,
+			final int fillColor) {
 		final int lastY = y + h;
 		final int lastX = x + w;
 		for (int j = y; j < lastY; j++) {

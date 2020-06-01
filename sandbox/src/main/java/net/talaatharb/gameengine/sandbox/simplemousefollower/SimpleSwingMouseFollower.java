@@ -6,6 +6,8 @@ import net.talaatharb.gameengine.graphics.Renderer;
 import net.talaatharb.gameengine.logic.GameLogic;
 
 public class SimpleSwingMouseFollower extends SwingGame {
+	
+	public static final String TITLE = "Simple Swing Mouse Follower";
 
 	public static void main(String[] args) {
 		final Game game = new SimpleSwingMouseFollower();
@@ -15,7 +17,7 @@ public class SimpleSwingMouseFollower extends SwingGame {
 	private GameLogic gameLogic;
 
 	public SimpleSwingMouseFollower() {
-		super(300, 300, 2, "Simple Swing Mouse Follower");
+		super(300, 300, 2, TITLE);
 	}
 
 	@Override

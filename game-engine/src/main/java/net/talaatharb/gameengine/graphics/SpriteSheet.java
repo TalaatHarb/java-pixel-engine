@@ -23,7 +23,8 @@ public class SpriteSheet {
 	private final int size;
 	private int width;
 
-	public SpriteSheet(final String path, final int size, final boolean external, final SpriteSheetLoader loader)
+	public SpriteSheet(final String path, final int size,
+			final boolean external, final SpriteSheetLoader loader)
 			throws IOException {
 		this.path = path;
 		this.size = size;
@@ -31,7 +32,8 @@ public class SpriteSheet {
 		loader.load(this);
 	}
 
-	public SpriteSheet(final String path, final SpriteSheetLoader loader) throws IOException {
+	public SpriteSheet(final String path, final SpriteSheetLoader loader)
+			throws IOException {
 		this(path, DEFAULT_SIZE, DEFAULT_EXTERNAL, loader);
 	}
 }

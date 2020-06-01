@@ -4,8 +4,6 @@ import java.awt.Component;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import net.talaatharb.gameengine.input.Keyboard;
-
 public class AWTKeyboard extends Keyboard implements KeyListener {
 
 	private Component parentComponent;

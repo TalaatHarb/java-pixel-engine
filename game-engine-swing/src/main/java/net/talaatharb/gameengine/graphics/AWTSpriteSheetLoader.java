@@ -20,9 +20,11 @@ public class AWTSpriteSheetLoader implements SpriteSheetLoader {
 		}
 	}
 
-	private void loadExternal(final SpriteSheet spriteSheet) throws IOException {
+	private void loadExternal(final SpriteSheet spriteSheet)
+			throws IOException {
 		try {
-			final BufferedImage image = ImageIO.read(new File(spriteSheet.getPath()));
+			final BufferedImage image = ImageIO
+					.read(new File(spriteSheet.getPath()));
 			final int w = image.getWidth();
 			final int h = image.getHeight();
 
@@ -34,15 +36,19 @@ public class AWTSpriteSheetLoader implements SpriteSheetLoader {
 			spriteSheet.setPixels(pixels);
 
 		} catch (IOException e) {
-			log.debug("Unable to load sprite sheet at location: " + spriteSheet.getPath());
+			log.debug("Unable to load sprite sheet at location: "
+					+ spriteSheet.getPath());
 			throw e;
 		}
 	}
 
-	private void loadInternal(final SpriteSheet spriteSheet) throws IOException {
-		final ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+	private void loadInternal(final SpriteSheet spriteSheet)
+			throws IOException {
+		final ClassLoader classloader = Thread.currentThread()
+				.getContextClassLoader();
 		try {
-			final BufferedImage image = ImageIO.read(classloader.getResource(spriteSheet.getPath()));
+			final BufferedImage image = ImageIO
+					.read(classloader.getResource(spriteSheet.getPath()));
 			final int w = image.getWidth();
 			final int h = image.getHeight();
 
@@ -57,7 +63,8 @@ public class AWTSpriteSheetLoader implements SpriteSheetLoader {
 			spriteSheet.setCellsY(h / spriteSheet.getSize());
 
 		} catch (IOException e) {
-			log.debug("Unable to load sprite sheet from resources at location: " + spriteSheet.getPath());
+			log.debug("Unable to load sprite sheet from resources at location: "
+					+ spriteSheet.getPath());
 			throw e;
 		}
 	}

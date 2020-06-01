@@ -38,8 +38,8 @@ public abstract class Keyboard {
 	public static final int VK_A = 0x41;
 
 	/**
-	 * Constant for the Accept or Commit function key. Japanese Solaris keyboard:
-	 * kakutei
+	 * Constant for the Accept or Commit function key. Japanese Solaris
+	 * keyboard: kakutei
 	 */
 	public static final int VK_ACCEPT = 0x001E;
 
@@ -55,7 +55,8 @@ public abstract class Keyboard {
 	public static final int VK_ALL_CANDIDATES = 0x0100;
 
 	/**
-	 * Constant for the Alphanumeric function key. Japanese PC 106 keyboard: eisuu
+	 * Constant for the Alphanumeric function key. Japanese PC 106 keyboard:
+	 * eisuu
 	 */
 	public static final int VK_ALPHANUMERIC = 0x00F0;
 
@@ -362,14 +363,16 @@ public abstract class Keyboard {
 	/** Constant for the F8 function key. */
 	public static final int VK_F8 = 0x77;
 
-	/* F13 - F24 are used on IBM 3270 keyboard; use random range for constants. */
+	/*
+	 * F13 - F24 are used on IBM 3270 keyboard; use random range for constants.
+	 */
 
 	/** Constant for the F9 function key. */
 	public static final int VK_F9 = 0x78;
 
 	/**
-	 * Constant for the FINAL key. not clear what this means - listed in Microsoft
-	 * Windows API
+	 * Constant for the FINAL key. not clear what this means - listed in
+	 * Microsoft Windows API
 	 */
 	public static final int VK_FINAL = 0x0018;
 
@@ -399,7 +402,8 @@ public abstract class Keyboard {
 	public static final int VK_HELP = 0x9C;
 
 	/**
-	 * Constant for the Hiragana function key. Japanese PC 106 keyboard: hiragana
+	 * Constant for the Hiragana function key. Japanese PC 106 keyboard:
+	 * hiragana
 	 */
 	public static final int VK_HIRAGANA = 0x00F2;
 
@@ -410,8 +414,8 @@ public abstract class Keyboard {
 	public static final int VK_I = 0x49;
 
 	/**
-	 * Constant for the input method on/off key. Japanese PC 106 keyboard: kanji.
-	 * Japanese Solaris keyboard: nihongo
+	 * Constant for the input method on/off key. Japanese PC 106 keyboard:
+	 * kanji. Japanese Solaris keyboard: nihongo
 	 */
 	public static final int VK_INPUT_METHOD_ON_OFF = 0x0107;
 
@@ -429,22 +433,22 @@ public abstract class Keyboard {
 
 	/**
 	 * Constant for the Japanese-Hiragana function key. This key switches to a
-	 * Japanese input method and selects its Hiragana input mode. Japanese Macintosh
-	 * keyboard
+	 * Japanese input method and selects its Hiragana input mode. Japanese
+	 * Macintosh keyboard
 	 */
 	public static final int VK_JAPANESE_HIRAGANA = 0x0104;
 
 	/**
 	 * Constant for the Japanese-Katakana function key. This key switches to a
-	 * Japanese input method and selects its Katakana input mode. Japanese Macintosh
-	 * keyboard - VK_JAPANESE_HIRAGANA + SHIFT
+	 * Japanese input method and selects its Katakana input mode. Japanese
+	 * Macintosh keyboard - VK_JAPANESE_HIRAGANA + SHIFT
 	 */
 	public static final int VK_JAPANESE_KATAKANA = 0x0103;
 
 	/**
-	 * Constant for the Japanese-Roman function key. This key switches to a Japanese
-	 * input method and selects its Roman-Direct input mode. Japanese Macintosh
-	 * keyboard
+	 * Constant for the Japanese-Roman function key. This key switches to a
+	 * Japanese input method and selects its Roman-Direct input mode. Japanese
+	 * Macintosh keyboard
 	 */
 	public static final int VK_JAPANESE_ROMAN = 0x0105;
 
@@ -458,22 +462,23 @@ public abstract class Keyboard {
 	public static final int VK_KANA = 0x0015;
 
 	/**
-	 * Constant for the locking Kana function key. This key locks the keyboard into
-	 * a Kana layout. Japanese PC 106 keyboard with special Windows driver - eisuu +
-	 * Control; Japanese Solaris keyboard: kana
+	 * Constant for the locking Kana function key. This key locks the keyboard
+	 * into a Kana layout. Japanese PC 106 keyboard with special Windows driver
+	 * - eisuu + Control; Japanese Solaris keyboard: kana
 	 */
 	public static final int VK_KANA_LOCK = 0x0106;
 
 	/* For European keyboards */
 
 	/**
-	 * Constant for KANJI.replaced by VK_INPUT_METHOD_ON_OFF for Microsoft Windows
-	 * and Solaris; might still be used for other platforms
+	 * Constant for KANJI.replaced by VK_INPUT_METHOD_ON_OFF for Microsoft
+	 * Windows and Solaris; might still be used for other platforms
 	 */
 	public static final int VK_KANJI = 0x0019;
 
 	/**
-	 * Constant for the Katakana function key. Japanese PC 106 keyboard: katakana
+	 * Constant for the Katakana function key. Japanese PC 106 keyboard:
+	 * katakana
 	 */
 	public static final int VK_KATAKANA = 0x00F1;
 
@@ -623,8 +628,8 @@ public abstract class Keyboard {
 	public static final int VK_PLUS = 0x0209;
 
 	/**
-	 * Constant for the Previous Candidate function key. Japanese PC 106 keyboard -
-	 * VK_CONVERT + SHIFT: maekouho
+	 * Constant for the Previous Candidate function key. Japanese PC 106
+	 * keyboard - VK_CONVERT + SHIFT: maekouho
 	 */
 	public static final int VK_PREVIOUS_CANDIDATE = 0x0101;
 
@@ -675,7 +680,8 @@ public abstract class Keyboard {
 	public static final int VK_SEMICOLON = 0x3B;
 
 	/**
-	 * This constant is obsolete, and is included only for backwards compatibility.
+	 * This constant is obsolete, and is included only for backwards
+	 * compatibility.
 	 * 
 	 */
 	public static final int VK_SEPARATER = 0x6C;
@@ -709,8 +715,8 @@ public abstract class Keyboard {
 	/** Constant for the "U" key. */
 	public static final int VK_U = 0x55;
 	/**
-	 * This value is used to indicate that the keyCode is unknown. KEY_TYPED events
-	 * do not have a keyCode value; this value is used instead.
+	 * This value is used to indicate that the keyCode is unknown. KEY_TYPED
+	 * events do not have a keyCode value; this value is used instead.
 	 */
 	public static final int VK_UNDEFINED = 0x0;
 	/**

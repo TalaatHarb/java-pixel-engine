@@ -11,17 +11,15 @@ import net.talaatharb.gameengine.sandbox.simplesquare.SimpleSwingSquare;
 @Slf4j
 public class Main {
 
-	private static final String SIMPLE_SWING_MOUSE_FOLLOWER = "Simple Swing Mouse Follower";
-	private static final String SIMPLE_SWING_SQUARE = "Simple Swing Square";
-
 	public static void main(final String[] args) {
 		final Map<String, Game> games = new HashMap<>();
 		Game game = null;
 
 		// Add all games
-		final String defaultGame = SIMPLE_SWING_SQUARE;
-		games.put(SIMPLE_SWING_SQUARE, new SimpleSwingSquare());
-		games.put(SIMPLE_SWING_MOUSE_FOLLOWER, new SimpleSwingMouseFollower());
+		final String defaultGame = SimpleSwingSquare.TITLE;
+		games.put(SimpleSwingSquare.TITLE, new SimpleSwingSquare());
+		games.put(SimpleSwingMouseFollower.TITLE,
+				new SimpleSwingMouseFollower());
 
 		if ((args == null) || args.length == 0) {
 			log.info("Opening Default game: " + defaultGame);

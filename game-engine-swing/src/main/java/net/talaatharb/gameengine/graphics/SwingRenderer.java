@@ -5,7 +5,6 @@ import java.awt.image.DataBufferInt;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import net.talaatharb.gameengine.graphics.Renderer;
 
 @Slf4j
 public class SwingRenderer extends Renderer {
@@ -17,7 +16,9 @@ public class SwingRenderer extends Renderer {
 		super(width, height);
 
 		log.debug("Constructing swing renderer");
-		this.image = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_RGB);
-		this.pixels = ((DataBufferInt) this.image.getRaster().getDataBuffer()).getData();
+		this.image = new BufferedImage(this.width, this.height,
+				BufferedImage.TYPE_INT_RGB);
+		this.pixels = ((DataBufferInt) this.image.getRaster().getDataBuffer())
+				.getData();
 	}
 }

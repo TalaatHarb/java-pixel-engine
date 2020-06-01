@@ -6,6 +6,8 @@ import net.talaatharb.gameengine.graphics.Renderer;
 import net.talaatharb.gameengine.logic.GameLogic;
 
 public class SimpleSwingSquare extends SwingGame {
+	
+	public static final String TITLE = "Simple Square";
 
 	public static void main(String[] args) {
 		final Game game = new SimpleSwingSquare();
@@ -15,7 +17,7 @@ public class SimpleSwingSquare extends SwingGame {
 	private GameLogic gameLogic;
 
 	public SimpleSwingSquare() {
-		super(500, 500, "Simple Square");
+		super(500, 500, TITLE);
 	}
 
 	@Override

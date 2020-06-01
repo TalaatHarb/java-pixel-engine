@@ -2,8 +2,6 @@ package net.talaatharb.gameengine.input;
 
 import java.awt.Component;
 
-import net.talaatharb.gameengine.input.Input;
-
 public class AWTInput extends Input {
 
 	public AWTInput(final Component parentComponent, final int scale) {

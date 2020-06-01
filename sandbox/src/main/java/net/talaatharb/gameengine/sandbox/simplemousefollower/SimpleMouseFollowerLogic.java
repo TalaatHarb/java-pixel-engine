@@ -2,6 +2,7 @@ package net.talaatharb.gameengine.sandbox.simplemousefollower;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -16,11 +17,12 @@ import net.talaatharb.gameengine.utils.NumberUtils;
 
 @Slf4j
 public class SimpleMouseFollowerLogic extends GameLogic {
+	private static final long CHANGE_TIME = (long) 1e9;
 	private static final int NUM_SPRITES = 3;
 	private static final Random RANDOM = new Random();
 	private static final String SHEET_PATH = "simplemousefollower/sheet.png";
-	private static final int SPEED = 5;
 
+	private static final int SPEED = 7;
 	private static final int TARGET_HEIGHT = 8;
 	private static final int TARGET_WIDTH = 8;
 	private int height;
@@ -32,7 +34,9 @@ public class SimpleMouseFollowerLogic extends GameLogic {
 	private SpriteSheet sheet;
 	private List<Sprite> sprites;
 	private int[] target;
+	private long time = 0L;
 	private int width;
+	private List<Integer> zIndex;
 
 	public SimpleMouseFollowerLogic(Game game) {
 		super(game);
@@ -47,30 +51,40 @@ public class SimpleMouseFollowerLogic extends GameLogic {
 
 		sprites = new ArrayList<>();
 		locations = new ArrayList<>();
+		zIndex = new ArrayList<>();
 		for (int i = 0; i < NUM_SPRITES; i++) {
 			final Sprite sprite = new Sprite(sheet, i, 0, 1, 1);
 			sprites.add(sprite);
-			locations.add(new int[] { RANDOM.nextInt(width - sprite.getWidth()),
-					RANDOM.nextInt(height - sprite.getHeight()) });
+			zIndex.add(i);
+			locations.add(new int[]{RANDOM.nextInt(width - sprite.getWidth()),
+					RANDOM.nextInt(height - sprite.getHeight())});
 		}
 		num = sprites.size();
 
-		target = new int[] { width / 2, height / 2 };
+		target = new int[]{width / 2, height / 2};
 		mouse = this.game.getInput().getMouse();
 	}
 
 	@Override
 	public void render(final Renderer renderer) {
-		for (int i = 0; i < num; i++) {
+		for (int i : zIndex) {
 			final int[] location = locations.get(i);
-			renderer.fillRec(target[0] - (TARGET_WIDTH >> 1), target[1] - (TARGET_HEIGHT >> 1), TARGET_WIDTH,
-					TARGET_HEIGHT, 0xFF00FF);
 			renderer.sprite(sprites.get(i), location[0], location[1]);
 		}
+		renderer.fillRec(target[0] - (TARGET_WIDTH >> 1),
+				target[1] - (TARGET_HEIGHT >> 1), TARGET_WIDTH, TARGET_HEIGHT,
+				0xFF00FF);
 	}
 
 	@Override
 	public void update(final long delta) {
+		// Change draw order randomly based on time
+		if (time > CHANGE_TIME) {
+			Collections.shuffle(zIndex);
+			log.debug("Order change after: " + time);
+			time = time % CHANGE_TIME;
+		}
+
 		target[0] = mouse.getX();
 		target[1] = mouse.getY();
 
@@ -81,9 +95,11 @@ public class SimpleMouseFollowerLogic extends GameLogic {
 			final Sprite sprite = sprites.get(i);
 			final int size = sheet.getSize();
 			final int[] location = locations.get(i);
-			final float[] difference = new float[] { target[0] - location[0] - (sprite.getWidth() >> 1),
-					target[1] - location[1] - (sprite.getHeight() >> 1) };
-			float abs = (float) Math.sqrt(difference[0] * difference[0] + difference[1] * difference[1]);
+			final float[] difference = new float[]{
+					target[0] - location[0] - (sprite.getWidth() >> 1),
+					target[1] - location[1] - (sprite.getHeight() >> 1)};
+			float abs = (float) Math.sqrt(difference[0] * difference[0]
+					+ difference[1] * difference[1]);
 			if (abs < 0.01f) {
 				difference[0] = 2.0f;
 				difference[1] = 2.0f;
@@ -99,6 +115,8 @@ public class SimpleMouseFollowerLogic extends GameLogic {
 			location[0] = NumberUtils.bound(location[0], 0, width - size);
 			location[1] = NumberUtils.bound(location[1], 0, height - size);
 		}
+		// Keep track of time
+		time += delta;
 	}
 
 }

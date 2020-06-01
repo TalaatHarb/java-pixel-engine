@@ -32,7 +32,8 @@ public abstract class SwingGame extends Game {
 		this(DEFAULT_HEIGHT, DEFAULT_WIDTH, DEFAULT_SCALE, DEFAULT_TITLE);
 	}
 
-	public SwingGame(final int height, final int width, final int scale, final String title) {
+	public SwingGame(final int height, final int width, final int scale,
+			final String title) {
 		super(height, width, scale, title);
 		log.debug(String.format("Game: %s constructed using Swing", title));
 	}
@@ -55,7 +56,8 @@ public abstract class SwingGame extends Game {
 		render(renderer);
 
 		// Draw layer
-		graphics.drawImage(((SwingRenderer) renderer).getImage(), 0, 0, canvas.getWidth(), canvas.getHeight(), null);
+		graphics.drawImage(((SwingRenderer) renderer).getImage(), 0, 0,
+				canvas.getWidth(), canvas.getHeight(), null);
 
 		graphics.dispose();
 		bufferStrategy.show();
@@ -68,7 +70,8 @@ public abstract class SwingGame extends Game {
 		this.frame.setResizable(false);
 
 		this.canvas = new Canvas();
-		this.canvas.setPreferredSize(new Dimension(this.scale * this.width, this.scale * this.height));
+		this.canvas.setPreferredSize(new Dimension(this.scale * this.width,
+				this.scale * this.height));
 
 		this.frame.add(this.canvas);
 		this.frame.pack();
@@ -96,7 +99,8 @@ public abstract class SwingGame extends Game {
 		new Timer().schedule(new TimerTask() {
 			@Override
 			public void run() {
-				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+				frame.dispatchEvent(
+						new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 			}
 		}, CLOSE_DELAY);
 		super.stop();
