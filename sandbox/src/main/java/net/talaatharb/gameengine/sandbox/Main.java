@@ -5,8 +5,8 @@ import java.util.Map;
 
 import lombok.extern.slf4j.Slf4j;
 import net.talaatharb.gameengine.Game;
-import net.talaatharb.gameengine.sandbox.simplemousefollower.SimpleSwingMouseFollower;
-import net.talaatharb.gameengine.sandbox.simplesquare.SimpleSwingSquare;
+import net.talaatharb.gameengine.sandbox.simplemousefollower.SimpleSwingMouseFollowerGame;
+import net.talaatharb.gameengine.sandbox.simplesquare.SimpleSwingSquareGame;
 
 @Slf4j
 public class Main {
@@ -16,10 +16,10 @@ public class Main {
 		Game game = null;
 
 		// Add all games
-		final String defaultGame = SimpleSwingSquare.TITLE;
-		games.put(SimpleSwingSquare.TITLE, new SimpleSwingSquare());
-		games.put(SimpleSwingMouseFollower.TITLE,
-				new SimpleSwingMouseFollower());
+		final String defaultGame = SimpleSwingSquareGame.TITLE;
+		games.put(SimpleSwingSquareGame.TITLE, new SimpleSwingSquareGame());
+		games.put(SimpleSwingMouseFollowerGame.TITLE,
+				new SimpleSwingMouseFollowerGame());
 
 		if ((args == null) || args.length == 0) {
 			log.info("Opening Default game: " + defaultGame);

@@ -54,14 +54,37 @@ public abstract class Renderer {
 		for (int y = 0; y < h; y++) {
 			final int yWorld = j + y;
 			if (yWorld >= this.height || yWorld < 0)
-				continue;
+				break;
 			final int yShiftSprite = y * w;
 			final int yShift = yWorld * width;
 			for (int x = 0; x < w; x++) {
 				final int xWorld = i + x;
 				if (xWorld >= this.width || xWorld < 0)
-					continue;
+					break;
 				pixels[xWorld + yShift] = spritePixels[x + yShiftSprite];
+			}
+		}
+	}
+
+	public void spriteWithTransparency(final Sprite sprite, final int i,
+			final int j, final int transparency) {
+		final int w = sprite.getWidth();
+		final int h = sprite.getHeight();
+		final int[] spritePixels = sprite.getPixels();
+
+		for (int y = 0; y < h; y++) {
+			final int yWorld = j + y;
+			if (yWorld >= this.height || yWorld < 0)
+				break;
+			final int yShiftSprite = y * w;
+			final int yShift = yWorld * width;
+			for (int x = 0; x < w; x++) {
+				final int xWorld = i + x;
+				if (xWorld >= this.width || xWorld < 0)
+					break;
+				final int pixelColor = spritePixels[x + yShiftSprite];
+				if (transparency != pixelColor)
+					pixels[xWorld + yShift] = spritePixels[x + yShiftSprite];
 			}
 		}
 	}
