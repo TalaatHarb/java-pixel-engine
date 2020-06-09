@@ -7,7 +7,7 @@ import net.talaatharb.gameengine.logic.GameLogic;
 
 public class SimpleSwingSquareGame extends SwingGame {
 
-	public static final String TITLE = "Simple Square";
+	public static final String TITLE = "Swing Simple Square";
 
 	public static void main(String[] args) {
 		final Game game = new SimpleSwingSquareGame();

@@ -7,7 +7,7 @@ import net.talaatharb.gameengine.logic.GameLogic;
 
 public class SimpleSwingMouseFollowerGame extends SwingGame {
 
-	public static final String TITLE = "Simple Swing Mouse Follower";
+	public static final String TITLE = "Swing Simple Mouse Follower";
 
 	public static void main(String[] args) {
 		final Game game = new SimpleSwingMouseFollowerGame();

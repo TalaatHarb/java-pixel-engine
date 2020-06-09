@@ -7,7 +7,7 @@ import net.talaatharb.gameengine.logic.GameLogic;
 
 public class AnimatedSpriteSwingGame extends SwingGame {
 
-	public static final String TITLE = "Animated Sprite";
+	public static final String TITLE = "Swing Animated Sprite";
 
 	public static void main(String[] args) {
 		final Game game = new AnimatedSpriteSwingGame();

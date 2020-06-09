@@ -5,6 +5,7 @@ import java.util.Map;
 
 import lombok.extern.slf4j.Slf4j;
 import net.talaatharb.gameengine.Game;
+import net.talaatharb.gameengine.sandbox.animatedsprite.AnimatedSpriteSwingGame;
 import net.talaatharb.gameengine.sandbox.simplemousefollower.SimpleSwingMouseFollowerGame;
 import net.talaatharb.gameengine.sandbox.simplesquare.SimpleSwingSquareGame;
 
@@ -20,17 +21,18 @@ public class Main {
 		games.put(SimpleSwingSquareGame.TITLE, new SimpleSwingSquareGame());
 		games.put(SimpleSwingMouseFollowerGame.TITLE,
 				new SimpleSwingMouseFollowerGame());
+		games.put(AnimatedSpriteSwingGame.TITLE, new AnimatedSpriteSwingGame());
 
 		if ((args == null) || args.length == 0) {
-			log.info("Opening Default game: " + defaultGame);
+			log.debug("Opening Default game: " + defaultGame);
 			game = games.get(defaultGame);
 		} else {
 			final String gameName = args[0];
-			log.info("Trying to open game: " + gameName);
+			log.debug("Trying to open game: " + gameName);
 			game = games.get(gameName);
 			if (game == null) {
 				log.warn("Unable to open game: " + gameName);
-				log.info("Opening Default game: " + defaultGame);
+				log.warn("Opening Default game: " + defaultGame);
 				game = games.get(defaultGame);
 			}
 		}
