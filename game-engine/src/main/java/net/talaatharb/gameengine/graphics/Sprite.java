@@ -11,6 +11,12 @@ public class Sprite {
 	protected int[] pixels;
 	protected int width;
 
+	public Sprite(final int width, final int height, final int[] pixels) {
+		this.width = width;
+		this.height = height;
+		this.pixels = pixels;
+	}
+
 	public Sprite(final SpriteSheet spriteSheet, final int indexX,
 			final int indexY, final int cellsX, final int cellsY) {
 
